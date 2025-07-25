@@ -15,7 +15,6 @@
     </div>
 
     <!-- Chart Section -->
-    {% if charts %}
     <div class="row mb-5">
         <div class="col-lg-6 mb-4">
             <div class="analytics-container">
@@ -24,7 +23,15 @@
                     Seed Performance Analysis
                 </h4>
                 <div class="chart-container">
+                    {% if charts and charts.seed_performance %}
                     <div id="seedPerformanceChart"></div>
+                    {% else %}
+                    <div class="chart-placeholder">
+                        <i class="fas fa-chart-bar"></i>
+                        <h5>Chart Loading...</h5>
+                        <p>Analyzing historical seed performance data</p>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -36,12 +43,19 @@
                     Scoring Trends Over Time
                 </h4>
                 <div class="chart-container">
+                    {% if charts and charts.scoring_trends %}
                     <div id="scoringTrendsChart"></div>
+                    {% else %}
+                    <div class="chart-placeholder">
+                        <i class="fas fa-chart-line"></i>
+                        <h5>Chart Loading...</h5>
+                        <p>Processing tournament scoring trends</p>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-    {% endif %}
 
     <!-- Key Statistics -->
     <div class="row mb-5">
