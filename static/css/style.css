@@ -441,6 +441,10 @@ body {
     padding: 2rem;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
+    min-height: 200px;
+    width: 100%;
+    display: block !important;
+    visibility: visible !important;
 }
 
 .analytics-container h4 {
@@ -454,6 +458,8 @@ body {
     height: 400px;
     background: #f8fafc;
     border-radius: 12px;
+    min-height: 350px !important;
+    width: 100% !important;
 }
 
 /* Specific styling for chart containers with actual charts */

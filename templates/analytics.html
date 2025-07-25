@@ -15,8 +15,8 @@
     </div>
 
     <!-- Chart Section -->
-    <div class="row mb-5">
-        <div class="col-lg-6 mb-4">
+    <div class="row mb-5" style="min-height: 500px;">
+        <div class="col-12 col-md-6 col-lg-6 mb-4">
             <div class="analytics-container">
                 <h4 class="mb-3">
                     <i class="fas fa-trophy me-2"></i>
@@ -37,7 +37,7 @@
             </div>
         </div>
         
-        <div class="col-lg-6 mb-4">
+        <div class="col-12 col-md-6 col-lg-6 mb-4">
             <div class="analytics-container">
                 <h4 class="mb-3">
                     <i class="fas fa-chart-area me-2"></i>
@@ -137,39 +137,48 @@
         <div class="col-lg-4 mb-4">
             <div class="analytics-container">
                 <h4 class="mb-3">
-                    <i class="fas fa-basketball-ball me-2"></i>
-                    Game Metrics
+                    <i class="fas fa-lightbulb me-2"></i>
+                    Key Insights
                 </h4>
-                <div class="metric-list">
-                    <div class="metric-item">
-                        <i class="fas fa-bullseye text-success"></i>
-                        <div>
-                            <strong>Avg. FG%</strong>
-                            <span>47.4% (Winners)</span>
+                
+                <div class="insights-feed">
+                    <div class="insight-item">
+                        <div class="insight-icon">
+                            <i class="fas fa-trophy text-warning"></i>
+                        </div>
+                        <div class="insight-content">
+                            <strong>Seed Power</strong>
+                            <p>Lower seeds (1-4) have won 78% of all championships since 1985.</p>
                         </div>
                     </div>
                     
-                    <div class="metric-item">
-                        <i class="fas fa-target text-info"></i>
-                        <div>
-                            <strong>Avg. 3P%</strong>
-                            <span>35.8% (Winners)</span>
+                    <div class="insight-item">
+                        <div class="insight-icon">
+                            <i class="fas fa-fire text-danger"></i>
+                        </div>
+                        <div class="insight-content">
+                            <strong>March Madness</strong>
+                            <p>12-5 matchups produce the most frequent upsets at 35.4% rate.</p>
                         </div>
                     </div>
                     
-                    <div class="metric-item">
-                        <i class="fas fa-hand-paper text-warning"></i>
-                        <div>
-                            <strong>Avg. FT%</strong>
-                            <span>73.2% (Winners)</span>
+                    <div class="insight-item">
+                        <div class="insight-icon">
+                            <i class="fas fa-chart-line text-success"></i>
+                        </div>
+                        <div class="insight-content">
+                            <strong>Evolution</strong>
+                            <p>Average scoring has increased 8% since 2010 due to rule changes.</p>
                         </div>
                     </div>
                     
-                    <div class="metric-item">
-                        <i class="fas fa-chart-line text-danger"></i>
-                        <div>
-                            <strong>Avg. Margin</strong>
-                            <span>11.7 points</span>
+                    <div class="insight-item">
+                        <div class="insight-icon">
+                            <i class="fas fa-shield-alt text-info"></i>
+                        </div>
+                        <div class="insight-content">
+                            <strong>Defense Wins</strong>
+                            <p>Teams allowing &lt;100 ppg win 73% more often in tournament.</p>
                         </div>
                     </div>
                 </div>
@@ -271,7 +280,7 @@
                         </div>
                         <div class="insight-content">
                             <strong>Defense Wins</strong>
-                            <p>Teams allowing <100 ppg win 73% more often in tournament.</p>
+                            <p>Teams allowing &lt;100 ppg win 73% more often in tournament.</p>
                         </div>
                     </div>
                 </div>
@@ -280,7 +289,7 @@
     </div>
 
     <!-- Model Performance -->
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-12">
             <div class="analytics-container">
                 <h4 class="mb-3">
@@ -288,8 +297,8 @@
                     ML Model Performance
                 </h4>
                 
-                <div class="row g-4">
-                    <div class="col-md-3">
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="performance-metric">
                             <div class="metric-value">91.4%</div>
                             <div class="metric-label">Overall Accuracy</div>
@@ -297,7 +306,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-md-3">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="performance-metric">
                             <div class="metric-value">0.979</div>
                             <div class="metric-label">AUC Score</div>
@@ -305,7 +314,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-md-3">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="performance-metric">
                             <div class="metric-value">0.062</div>
                             <div class="metric-label">Brier Score</div>
@@ -313,7 +322,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-md-3">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="performance-metric">
                             <div class="metric-value">1,382</div>
                             <div class="metric-label">Training Games</div>
@@ -322,7 +331,7 @@
                     </div>
                 </div>
                 
-                <div class="feature-importance mt-4">
+                <div class="feature-importance">
                     <h5>Feature Importance Ranking:</h5>
                     <div class="feature-bars">
                         <div class="feature-bar">
