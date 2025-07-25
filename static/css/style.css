@@ -454,12 +454,20 @@ body {
     height: 400px;
     background: #f8fafc;
     border-radius: 12px;
+}
+
+/* Specific styling for chart containers with actual charts */
+.chart-container div[id*="Chart"] {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Placeholder styling only when no chart is present */
+.chart-placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.chart-placeholder {
+    height: 100%;
     text-align: center;
     color: #64748b;
 }

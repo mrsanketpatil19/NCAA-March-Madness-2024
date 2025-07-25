@@ -576,17 +576,69 @@
 // Render charts if data is available
 {% if charts %}
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('📊 Analytics page loaded, initializing charts...');
+    
     // Render seed performance chart
     {% if charts.seed_performance %}
-    var seedChart = {{ charts.seed_performance|safe }};
-    Plotly.newPlot('seedPerformanceChart', seedChart.data, seedChart.layout);
+    try {
+        console.log('🎯 Rendering seed performance chart...');
+        var seedChart = {{ charts.seed_performance|safe }};
+        
+        // Ensure container exists and has proper dimensions
+        const seedContainer = document.getElementById('seedPerformanceChart');
+        if (seedContainer) {
+            seedContainer.style.width = '100%';
+            seedContainer.style.height = '350px';
+            
+            Plotly.newPlot('seedPerformanceChart', seedChart.data, seedChart.layout, {
+                responsive: true,
+                displayModeBar: false
+            });
+            console.log('✅ Seed performance chart rendered successfully');
+        } else {
+            console.error('❌ Seed chart container not found');
+        }
+    } catch (error) {
+        console.error('❌ Error rendering seed chart:', error);
+    }
+    {% else %}
+    console.log('⚠️ No seed performance chart data available');
     {% endif %}
     
     // Render scoring trends chart
     {% if charts.scoring_trends %}
-    var scoringChart = {{ charts.scoring_trends|safe }};
-    Plotly.newPlot('scoringTrendsChart', scoringChart.data, scoringChart.layout);
+    try {
+        console.log('📈 Rendering scoring trends chart...');
+        var scoringChart = {{ charts.scoring_trends|safe }};
+        
+        // Ensure container exists and has proper dimensions
+        const scoringContainer = document.getElementById('scoringTrendsChart');
+        if (scoringContainer) {
+            scoringContainer.style.width = '100%';
+            scoringContainer.style.height = '350px';
+            
+            Plotly.newPlot('scoringTrendsChart', scoringChart.data, scoringChart.layout, {
+                responsive: true,
+                displayModeBar: false
+            });
+            console.log('✅ Scoring trends chart rendered successfully');
+        } else {
+            console.error('❌ Scoring chart container not found');
+        }
+    } catch (error) {
+        console.error('❌ Error rendering scoring chart:', error);
+    }
+    {% else %}
+    console.log('⚠️ No scoring trends chart data available');
     {% endif %}
+    
+    // Add resize handler for responsive charts
+    window.addEventListener('resize', function() {
+        if (typeof Plotly !== 'undefined') {
+            Plotly.Plots.resize('seedPerformanceChart');
+            Plotly.Plots.resize('scoringTrendsChart');
+        }
+    });
 });
 {% endif %}
 
