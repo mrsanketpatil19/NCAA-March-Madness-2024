@@ -273,9 +273,9 @@ class NCAAPredictor:
             team2_mask = self.team_stats['TeamID'] == team2_id
             
             if not team1_mask.any():
-                raise Exception(f"Team {team1_name} (ID: {team1_id}) not found in training data")
+                raise Exception(f"Team {team1_name} (ID: {team1_id}) not found in training data. This team has no historical NCAA tournament appearances in our dataset.")
             if not team2_mask.any():
-                raise Exception(f"Team {team2_name} (ID: {team2_id}) not found in training data")
+                raise Exception(f"Team {team2_name} (ID: {team2_id}) not found in training data. This team has no historical NCAA tournament appearances in our dataset.")
             
             # Get team stats
             team1_stats = self.team_stats[team1_mask].iloc[0]
@@ -317,9 +317,9 @@ class NCAAPredictor:
             raise Exception(f"Error predicting game: {e}")
     
     async def get_teams_list(self) -> List[Dict]:
-        """Get list of all teams"""
+        """Get list of teams (filtered to those with tournament history when possible)"""
+        # First, get all teams
         if self.teams_data is None:
-            # Load teams data if not already loaded
             try:
                 teams_data = pd.read_csv(os.path.join(self.base_path, "MTeams.csv"))
                 teams = []
@@ -333,6 +333,23 @@ class NCAAPredictor:
                 print(f"Error loading teams: {e}")
                 return []
         
+        # If we have team_stats, filter to only those teams
+        if self.team_stats is not None and len(self.team_stats) > 0:
+            try:
+                available_team_ids = set(self.team_stats['TeamID'].tolist())
+                teams = []
+                for _, team in self.teams_data.iterrows():
+                    if team["TeamID"] in available_team_ids:
+                        teams.append({
+                            "id": int(team["TeamID"]),
+                            "name": team["TeamName"]
+                        })
+                print(f"✅ Filtered to {len(teams)} teams with tournament history")
+                return sorted(teams, key=lambda x: x["name"])
+            except Exception as e:
+                print(f"Error filtering teams: {e}")
+        
+        # Fallback: return all teams
         teams = []
         for _, team in self.teams_data.iterrows():
             teams.append({
@@ -340,6 +357,58 @@ class NCAAPredictor:
                 "name": team["TeamName"]
             })
         return sorted(teams, key=lambda x: x["name"])
+    
+    async def get_teams_with_no_history(self) -> List[Dict]:
+        """Get list of teams without tournament history (cannot make predictions)"""
+        if self.teams_data is None or self.team_stats is None:
+            return []
+        
+        # Get teams that are in teams_data but not in team_stats
+        available_team_ids = set(self.team_stats['TeamID'].tolist())
+        all_team_ids = set(self.teams_data['TeamID'].tolist())
+        missing_team_ids = all_team_ids - available_team_ids
+        
+        teams_no_history = []
+        for team_id in missing_team_ids:
+            team_info = self.teams_data[self.teams_data['TeamID'] == team_id].iloc[0]
+            teams_no_history.append({
+                "id": int(team_id),
+                "name": team_info["TeamName"],
+                "reason": "No NCAA tournament history in dataset"
+            })
+        
+        return sorted(teams_no_history, key=lambda x: x["name"])
+    
+    async def check_team_availability(self, team_id: int) -> Dict:
+        """Check if a team is available for predictions"""
+        try:
+            if self.teams_data is None:
+                return {
+                    "team_id": team_id,
+                    "team_name": "Unknown",
+                    "available_for_prediction": False,
+                    "reason": "Teams data not loaded"
+                }
+            
+            team_name = self.teams_data[self.teams_data['TeamID'] == team_id]['TeamName'].iloc[0]
+            has_history = False
+            
+            if self.team_stats is not None and len(self.team_stats) > 0:
+                has_history = team_id in self.team_stats['TeamID'].values
+            
+            return {
+                "team_id": team_id,
+                "team_name": team_name,
+                "available_for_prediction": has_history,
+                "reason": "Has tournament history" if has_history else "No tournament history in dataset"
+            }
+        except (IndexError, KeyError) as e:
+            return {
+                "team_id": team_id,
+                "team_name": "Unknown",
+                "available_for_prediction": False,
+                "reason": f"Team not found in database: {str(e)}"
+            }
     
     async def get_team_stats(self, team_id: int) -> Dict:
         """Get detailed stats for a team"""

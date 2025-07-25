@@ -159,20 +159,20 @@
             <h3 class="text-center mb-4">Popular Matchups</h3>
             <div class="row g-3">
                 <div class="col-md-4">
-                    <div class="popular-matchup" onclick="quickPredict(1104, 1181)">
+                    <div class="popular-matchup" onclick="quickPredict(1104, 1242)">
                         <span class="matchup-text">Alabama vs Kansas</span>
                         <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="popular-matchup" onclick="quickPredict(1242, 1207)">
-                        <span class="matchup-text">Kansas vs Georgetown</span>
+                    <div class="popular-matchup" onclick="quickPredict(1181, 1314)">
+                        <span class="matchup-text">Duke vs North Carolina</span>
                         <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="popular-matchup" onclick="quickPredict(1314, 1276)">
-                        <span class="matchup-text">Duke vs North Carolina</span>
+                    <div class="popular-matchup" onclick="quickPredict(1242, 1276)">
+                        <span class="matchup-text">Kansas vs Michigan</span>
                         <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
@@ -231,14 +231,26 @@ async function makePrediction(team1Id, team2Id) {
         });
         
         if (!response.ok) {
-            throw new Error('Prediction failed');
+            const errorData = await response.json();
+            throw new Error(errorData.detail || 'Prediction failed');
         }
         
         const result = await response.json();
         displayPrediction(result);
         
     } catch (error) {
-        showError('Error making prediction: ' + error.message);
+        let errorMessage = error.message;
+        
+        // Provide helpful error message for teams without tournament history
+        if (errorMessage.includes('not found in training data')) {
+            errorMessage = `⚠️ Cannot predict this matchup. One or both teams have no historical NCAA tournament data in our training set. 
+            
+            Our model can only predict games between teams that have appeared in past NCAA tournaments with detailed statistics.
+            
+            Please try selecting different teams that have tournament history.`;
+        }
+        
+        showError(errorMessage);
     } finally {
         loadingSpinner.style.display = 'none';
     }

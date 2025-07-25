@@ -184,6 +184,24 @@ async def get_conference_strength():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/api/teams-no-history")
+async def get_teams_no_history():
+    """Get teams without tournament history (cannot make predictions)"""
+    try:
+        teams = await predictor.get_teams_with_no_history()
+        return JSONResponse(content=teams)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/check-team/{team_id}")
+async def check_team_availability(team_id: int):
+    """Check if a team is available for predictions"""
+    try:
+        availability = await predictor.check_team_availability(team_id)
+        return JSONResponse(content=availability)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True) 
