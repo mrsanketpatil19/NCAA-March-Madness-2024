@@ -635,8 +635,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add resize handler for responsive charts
     window.addEventListener('resize', function() {
         if (typeof Plotly !== 'undefined') {
-            Plotly.Plots.resize('seedPerformanceChart');
-            Plotly.Plots.resize('scoringTrendsChart');
+            try {
+                Plotly.Plots.resize('seedPerformanceChart');
+                Plotly.Plots.resize('scoringTrendsChart');
+            } catch (e) {
+                console.log('Chart resize error (expected if charts not loaded):', e.message);
+            }
         }
     });
 });

@@ -531,8 +531,12 @@ class NCAAPredictor:
             seed_total = self.tournament_data.groupby('WSeedNum').size() + self.tournament_data.groupby('LSeedNum').size()
             win_pct = (seed_wins / seed_total * 100).fillna(0)
             
+            # Convert to plain arrays for Plotly
+            seeds = win_pct.index.tolist()
+            percentages = win_pct.values.tolist()
+            
             fig1 = go.Figure(data=[
-                go.Bar(x=win_pct.index, y=win_pct.values, marker_color='orange')
+                go.Bar(x=seeds, y=percentages, marker_color='orange')
             ])
             fig1.update_layout(
                 title="Win Percentage by Tournament Seed",
@@ -540,7 +544,7 @@ class NCAAPredictor:
                 yaxis_title="Win Percentage (%)",
                 template="plotly_dark"
             )
-            charts["seed_performance"] = plotly.utils.PlotlyJSONEncoder().encode(fig1)
+            charts["seed_performance"] = fig1.to_json()
             
             # Scoring trends over time
             yearly_scores = self.tournament_data.groupby('Season').agg({
@@ -549,10 +553,14 @@ class NCAAPredictor:
             }).reset_index()
             yearly_scores['total_score'] = yearly_scores['WScore'] + yearly_scores['LScore']
             
+            # Convert to plain arrays for Plotly
+            seasons = yearly_scores['Season'].tolist()
+            scores = yearly_scores['total_score'].tolist()
+            
             fig2 = go.Figure()
             fig2.add_trace(go.Scatter(
-                x=yearly_scores['Season'], 
-                y=yearly_scores['total_score'],
+                x=seasons, 
+                y=scores,
                 mode='lines+markers',
                 name='Average Total Score',
                 line=dict(color='cyan')
@@ -563,8 +571,9 @@ class NCAAPredictor:
                 yaxis_title="Average Total Score",
                 template="plotly_dark"
             )
-            charts["scoring_trends"] = plotly.utils.PlotlyJSONEncoder().encode(fig2)
+            charts["scoring_trends"] = fig2.to_json()
             
+            print(f"✅ Generated charts with {len(seeds)} seed data points and {len(seasons)} season data points")
             return charts
             
         except Exception as e:
