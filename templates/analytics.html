@@ -30,6 +30,7 @@
                         <i class="fas fa-chart-bar"></i>
                         <h5>Chart Loading...</h5>
                         <p>Analyzing historical seed performance data</p>
+                        <small>Debug: Charts={{ 'available' if charts else 'missing' }}, Seed data={{ 'present' if charts and charts.seed_performance else 'missing' }}</small>
                     </div>
                     {% endif %}
                 </div>
@@ -50,6 +51,7 @@
                         <i class="fas fa-chart-line"></i>
                         <h5>Chart Loading...</h5>
                         <p>Processing tournament scoring trends</p>
+                        <small>Debug: Charts={{ 'available' if charts else 'missing' }}, Scoring data={{ 'present' if charts and charts.scoring_trends else 'missing' }}</small>
                     </div>
                     {% endif %}
                 </div>
