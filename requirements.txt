@@ -1,24 +1,24 @@
-# NCAA March Madness Predictor 2025 - Dependencies
+# NCAA March Madness Predictor 2025 - Dependencies (Python 3.13 Compatible)
 
 # Web Framework
-fastapi==0.116.1
-uvicorn[standard]==0.35.0
-jinja2==3.1.6
-python-multipart==0.0.20
+fastapi>=0.116.1
+uvicorn[standard]>=0.35.0
+jinja2>=3.1.6
+python-multipart>=0.0.20
 
 # Machine Learning & Data Science
-pandas==2.0.3
-numpy==1.24.3
-scikit-learn==1.6.1
-xgboost==2.1.4
+pandas>=2.2.0
+numpy>=1.26.0
+scikit-learn>=1.4.0
+xgboost>=2.1.0
 
 # Data Visualization
-plotly==6.2.0
-matplotlib>=3.5.0
+plotly>=5.17.0
+matplotlib>=3.8.0
 
 # Development & Utilities
-python-dotenv>=0.19.0
-requests>=2.28.0
+python-dotenv>=1.0.0
+requests>=2.31.0
 
-# Optional: For enhanced performance
-gunicorn>=20.1.0 
+# For deployment
+gunicorn>=21.2.0 
