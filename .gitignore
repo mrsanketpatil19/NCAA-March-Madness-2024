@@ -141,6 +141,9 @@ $RECYCLE.BIN/
 *.h5
 *.model
 
+# Large data files
+march-machine-learning-mania-2025/MMasseyOrdinals.csv
+
 # Logs
 *.log
 logs/
