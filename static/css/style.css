@@ -45,29 +45,26 @@ body {
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(55, 48, 163, 0.9) 100%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
-    background-size: 30px 30px;
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.6) 0%, rgba(255, 107, 53, 0.6) 100%), url('/static/images/basketball-buying-guide.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     padding: 100px 0;
     margin-top: -76px;
     padding-top: 176px;
+    position: relative;
+    overflow: hidden;
 }
 
-.basketball-animation {
-    animation: bounce 2s infinite;
+.hero-section h1,
+.hero-section p,
+.hero-section .btn {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-30px);
-    }
-    60% {
-        transform: translateY(-15px);
-    }
-}
+
+
+/* Basketball animation removed for cleaner design */
 
 /* Stat Cards */
 .stat-card {
@@ -140,6 +137,21 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 400px;
+    position: relative;
+}
+
+.feature-card .feature-icon {
+    margin-bottom: 1.5rem;
+}
+
+.feature-card .feature-icon i {
+    font-size: 2.5rem;
+}
+
+.feature-button-wrapper {
+    margin-top: auto;
+    padding-top: 1rem;
 }
 
 .feature-card:hover {
@@ -167,6 +179,14 @@ body {
     color: var(--primary-blue);
     font-weight: 600;
     margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.feature-card p {
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: #6b7280;
 }
 
 /* Performance Card */
@@ -177,6 +197,15 @@ body {
     box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.performance-metric {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    min-height: 120px;
+    text-align: center;
 }
 
 .performance-metric h2 {
@@ -191,6 +220,13 @@ body {
     border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.quick-actions h3 {
+    margin-bottom: 2rem;
+    color: var(--primary-blue);
+    font-weight: 600;
 }
 
 .action-button {
@@ -207,6 +243,20 @@ body {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     height: 100%;
     min-height: 120px;
+    text-align: center;
+    position: relative;
+}
+
+.action-button i {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.action-button span {
+    margin-top: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
 .action-button:hover {
@@ -215,10 +265,7 @@ body {
     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
 }
 
-.action-button i {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
+
 
 /* Team Prediction Page */
 .prediction-form-card {
@@ -440,6 +487,7 @@ body {
     .hero-section {
         padding: 60px 0;
         padding-top: 136px;
+        background-attachment: scroll;
     }
     
     .stat-card {

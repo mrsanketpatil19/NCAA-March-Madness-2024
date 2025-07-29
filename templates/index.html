@@ -8,12 +8,11 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <h1 class="display-4 fw-bold text-white mb-4">
-                    <i class="fas fa-basketball-ball text-warning me-3"></i>
                     March Madness 2025
                 </h1>
-                <p class="lead text-white-50 mb-4">
+                <p class="lead text-white mb-4">
                     Advanced machine learning predictions for the NCAA basketball tournament. 
-                    Leveraging 20+ years of historical data to predict game outcomes with 91% accuracy.
+                    Leveraging 20+ years of historical data to predict game outcomes with 81.6% accuracy.
                 </p>
                 <div class="d-flex gap-3">
                     <a href="/predict" class="btn btn-warning btn-lg">
@@ -24,11 +23,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-6 text-center">
-                <div class="basketball-animation">
-                    <i class="fas fa-basketball-ball fa-10x text-warning opacity-75"></i>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
@@ -94,7 +89,9 @@
                 </div>
                 <h4>AI-Powered Predictions</h4>
                 <p>Our XGBoost model analyzes shooting efficiency, seed rankings, and historical performance to predict game outcomes with remarkable accuracy.</p>
-                <a href="/predict" class="btn btn-primary">Try Predictions</a>
+                <div class="feature-button-wrapper">
+                    <a href="/predict" class="btn btn-primary">Try Predictions</a>
+                </div>
             </div>
         </div>
         
@@ -105,7 +102,9 @@
                 </div>
                 <h4>Advanced Analytics</h4>
                 <p>Dive deep into tournament data with interactive visualizations, seed performance analysis, and upset prediction insights.</p>
-                <a href="/analytics" class="btn btn-primary">View Analytics</a>
+                <div class="feature-button-wrapper">
+                    <a href="/analytics" class="btn btn-primary">View Analytics</a>
+                </div>
             </div>
         </div>
         
@@ -116,13 +115,15 @@
                 </div>
                 <h4>Bracket Simulation</h4>
                 <p>Complete tournament bracket predictions with championship forecasts and Final Four projections based on ML models.</p>
-                <a href="/bracket" class="btn btn-primary">View Bracket</a>
+                <div class="feature-button-wrapper">
+                    <a href="/bracket" class="btn btn-primary">View Bracket</a>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Model Performance -->
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-lg-8 mx-auto">
             <div class="performance-card">
                 <h3 class="text-center mb-4">
@@ -167,7 +168,7 @@
                 <div class="row g-3 equal-height-actions">
                     <div class="col-md-3">
                         <a href="/predict" class="action-button">
-                            <i class="fas fa-vs"></i>
+                            <i class="fas fa-gamepad"></i>
                             <span>Predict Matchup</span>
                         </a>
                     </div>
