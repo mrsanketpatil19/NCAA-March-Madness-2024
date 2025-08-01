@@ -117,6 +117,13 @@ async def analytics_page(request: Request):
             "error": str(e)
         })
 
+# Direct image serving for Railway.app compatibility
+@app.get("/images/basketball-buying-guide.jpg")
+async def serve_background_image():
+    """Serve the background image directly"""
+    from fastapi.responses import FileResponse
+    return FileResponse("static/images/basketball-buying-guide.jpg")
+
 # API Endpoints
 @app.post("/api/predict-matchup")
 async def predict_matchup(
