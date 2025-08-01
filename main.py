@@ -122,7 +122,13 @@ async def analytics_page(request: Request):
 async def serve_background_image():
     """Serve the background image directly"""
     from fastapi.responses import FileResponse
-    return FileResponse("static/images/basketball-buying-guide.jpg")
+    import os
+    image_path = "static/images/basketball-buying-guide.jpg"
+    if os.path.exists(image_path):
+        return FileResponse(image_path, media_type="image/jpeg")
+    else:
+        from fastapi.responses import JSONResponse
+        return JSONResponse({"error": "Image not found"}, status_code=404)
 
 # API Endpoints
 @app.post("/api/predict-matchup")

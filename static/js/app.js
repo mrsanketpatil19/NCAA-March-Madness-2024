@@ -87,6 +87,9 @@ function removeLoadingState(button) {
 }
 
 function initializeDashboard() {
+    // Load background image dynamically
+    loadBackgroundImage();
+    
     // Animate statistics cards on scroll
     const observeElements = document.querySelectorAll('.stat-card, .feature-card');
     
@@ -116,6 +119,41 @@ function initializeDashboard() {
             }, 1000);
         }, 3000);
     }
+}
+
+function loadBackgroundImage() {
+    const heroSection = document.querySelector('.hero-section');
+    if (!heroSection) return;
+    
+    // Try multiple image sources
+    const imageSources = [
+        '/static/images/basketball-buying-guide.jpg',
+        '/images/basketball-buying-guide.jpg',
+        'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=1200&h=800&fit=crop'
+    ];
+    
+    let currentIndex = 0;
+    
+    function tryNextImage() {
+        if (currentIndex >= imageSources.length) {
+            console.log('All background image sources failed');
+            return;
+        }
+        
+        const img = new Image();
+        img.onload = function() {
+            heroSection.style.backgroundImage = `linear-gradient(135deg, rgba(30, 58, 138, 0.6) 0%, rgba(255, 107, 53, 0.6) 100%), url('${imageSources[currentIndex]}')`;
+            console.log('Background image loaded successfully');
+        };
+        img.onerror = function() {
+            console.log(`Failed to load image: ${imageSources[currentIndex]}`);
+            currentIndex++;
+            tryNextImage();
+        };
+        img.src = imageSources[currentIndex];
+    }
+    
+    tryNextImage();
 }
 
 function initializePrediction() {
